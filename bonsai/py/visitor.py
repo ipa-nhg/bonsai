@@ -381,8 +381,8 @@ class BuilderVisitor(ast.NodeVisitor):
         return self._make_name(py_node, py_node.id)
 
     def visit_NameConstant(self, py_node):
-        return py_node.value, self.scope, None
-
+        return py_node.value, self.scope, None 
+    
     def visit_NoneAST(self, py_node):
         bonsai_node = py_model.PyNull(self.scope, self.parent)
         return bonsai_node, self.scope, None
@@ -408,19 +408,6 @@ class BuilderVisitor(ast.NodeVisitor):
     def visit_Str(self, py_node):
         return py_node.s, self.scope, None
 
-    def visit_Constant(self, py_node):
-        # Added in Python 3.6+
-        # Replaces visit_Str, etc.
-        # This code is ugly to be compatible with Python 2.7
-        value = py_node.value
-        type_name = type(value).__name__
-        # We have to duplicate code because methods are decorated...
-        # Calling decorated method would `builder.add_child()` twice.
-        if type_name in ('bool', 'NoneType', 'int', 'float', 'complex',
-                         'str', 'bytes', 'ellipsis'):
-            return value, self.scope, None
-        return self.generic_visit(node)
-
     def visit_Subscript(self, py_node):
         return py_model.PyDummyExpr(self.scope, self.parent), self.scope, None
 
@@ -444,4 +431,3 @@ class BuilderVisitor(ast.NodeVisitor):
 
     def visit_Yield(self, py_node):
         return py_model.PyDummyExpr(self.scope, self.parent), self.scope, None
-
