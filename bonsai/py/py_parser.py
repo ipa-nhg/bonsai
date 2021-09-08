@@ -219,6 +219,8 @@ class PyAstParser(object):
             return self.global_scope
 
         node, imported_names = self._parse_file(file_path)
+        print("!!! PY PARSER !!!")
+        print(node)
         self.global_scope._add(node)
 
         for source in self.file_finder.find_files(file_path, imported_names):
