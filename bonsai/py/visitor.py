@@ -238,7 +238,7 @@ class BuilderVisitor(ast.NodeVisitor):
         props = {
             'args_count': len(py_node.args or ()),
             'kwargs_count': len(py_node.keywords or ()),
-            'has_starargs': py_node.starargs is not None,
+            'has_starargs': py_node.star_args is not None,
             'has_kwargs': py_node.kwargs is not None,
         }
         return bonsai_node, self.scope, props
