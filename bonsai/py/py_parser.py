@@ -216,11 +216,14 @@ class PyAstParser(object):
             file_path = path.join(file_path, '__init__.py')
 
         if not path.isfile(file_path):
+            print("!!!! RETUNR BECAUSE IT ISN'T A FILE")
             return self.global_scope
 
         node, imported_names = self._parse_file(file_path)
-        print("!!! PY PARSER !!!")
+        print("!!!!!!!!!! NODE:")
         print(node)
+        print("!!!!!!!!!! IMPORTED NAMES:")
+        print(imported_names)
         self.global_scope._add(node)
 
         for source in self.file_finder.find_files(file_path, imported_names):
