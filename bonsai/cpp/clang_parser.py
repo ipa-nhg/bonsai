@@ -908,17 +908,17 @@ class CppTopLevelBuilder(CppEntityBuilder):
 class CppAstParser(CodeAstParser):
     lib_path = None
     lib_file = None
-    includes = "/usr/lib/llvm-3.8/lib/clang/3.8.0/include"
+    includes = "/usr/lib/llvm-14/lib/clang/14.0.0/include"
     database = None
 
     # system required / user optional
     @staticmethod
-    def set_library_path(lib_path='/usr/lib/llvm-3.8/lib'):
+    def set_library_path(lib_path='/usr/lib/llvm-14/lib'):
         clang.Config.set_library_path(lib_path)
         CppAstParser.lib_path = lib_path
 
     @staticmethod
-    def set_library_file(lib_file = "/usr/lib/llvm-3.8/lib/libclang.so"):
+    def set_library_file(lib_file = "/usr/lib/llvm-14/lib/libclang.so"):
         clang.Config.set_library_file(lib_file)
         CppAstParser.lib_file = lib_file
 
